@@ -1,0 +1,13 @@
+package com.gestion.model.entities;
+
+import lombok.Data;
+
+@Data
+public class XXXXEntity {
+    private int id;
+    private String email;
+    private String telephone;
+    private String m1;
+    private String p1;
+    private String p2;
+}
