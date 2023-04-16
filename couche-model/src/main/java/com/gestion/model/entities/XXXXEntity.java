@@ -6,4 +6,5 @@ import lombok.Data;
 public class XXXXEntity {
     private int id;
     private String email;
+    private String telephone;
 }
