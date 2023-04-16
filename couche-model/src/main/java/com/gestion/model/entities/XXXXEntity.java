@@ -10,4 +10,5 @@ public class XXXXEntity {
     private String m1;
     private String p1;
     private String p2;
+    private String p3;
 }
