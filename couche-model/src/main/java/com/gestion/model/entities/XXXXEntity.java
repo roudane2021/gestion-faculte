@@ -7,5 +7,4 @@ public class XXXXEntity {
     private int id;
     private String email;
     private String telephone;
-    private String m1;
 }
