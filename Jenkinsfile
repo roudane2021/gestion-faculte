@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Étape pour déployer l'application
-                sh 'java -jar target/votre-application.jar'
+                sh 'java -jar target/couche-web-1.0-SNAPSHOT.jar'
             }
         }
     }
