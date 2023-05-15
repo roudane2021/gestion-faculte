@@ -1,17 +1,32 @@
-#!/usr/bin/env groovy
-
 pipeline {
-
+    agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building...'
+                // Étape pour récupérer le code source depuis le dépôt Git
+                git 'https://github.com/roudane2021/gestion-faculte.git'
             }
         }
+
+        stage('Build') {
+            steps {
+                // Étape pour construire l'application avec Maven
+                sh 'mvn clean package'
+            }
+        }
+
         stage('Test') {
             steps {
-                echo 'Testing...'
+                // Étape pour exécuter les tests avec Maven
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Étape pour déployer l'application
+                sh 'java -jar target/votre-application.jar'
             }
         }
     }
