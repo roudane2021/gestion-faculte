@@ -15,7 +15,7 @@
 
   <dependencyManagement>
 <dependencies>
-  <!-- ===== Modules ===== -->
+  <!-- ===== Modules hhhh===== -->
   <dependency>
     <groupId>com.gestion</groupId>
     <artifactId>couche-web</artifactId>
