@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Étape pour récupérer le code source depuis le dépôt Git
-                git 'https://github.com/roudane2021/gestion-faculte.git'
-            }
-        }
 
         stage('Build') {
             steps {
