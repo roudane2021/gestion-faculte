@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  api_gestion_unv:
+    build: .
+    image: b_gestion_unv:2.0
+    container_name: b_gestion_unv_container
+    restart: always
+    ports:
+      - 8989:9090
+    networks:
+      - gestion
+    environment:
+      - APP_USERNAME=root
+      - APP_PASSWORD=roudane123456
+    depends_on:
+      - oracle_xe
+  oracle_xe:
+    image: "gvenzl/oracle-xe:latest"
+    restart: always
+    ports:
+      - 1521:1521
+    networks:
+      - gestion
+    environment:
+      - ORACLE_PASSWORD=oracle
+      - APP_USER=root
+      - APP_USER_PASSWORD=roudane123456
+    volumes:
+      - data:/opt/oracle/oradata gvenzl/oracle-xe
+
+networks:
+  gestion:
+    external: true
+volumes:
+  data:
+    external: true
