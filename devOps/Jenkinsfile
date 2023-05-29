@@ -20,6 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Lancer les conteneurs Docker avec docker-compose
+                sh 'cd devOps/backend'
                 sh 'docker-compose up -d'
             }
         }
