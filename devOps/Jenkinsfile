@@ -19,8 +19,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Étape pour déployer l'application
-                sh 'java -jar target/couche-web-1.0-SNAPSHOT.jar'
+                // Lancer les conteneurs Docker avec docker-compose
+                sh 'docker-compose up -d'
             }
         }
     }
