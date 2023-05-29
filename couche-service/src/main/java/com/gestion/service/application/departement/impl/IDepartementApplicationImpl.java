@@ -5,12 +5,11 @@ import com.gestion.model.entities.DepartementEntity;
 import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.service.application.departement.mapper.IDepartementMapper;
 import com.gestion.service.application.departement.models.Departement;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional

@@ -22,6 +22,7 @@ public class GestionApplication  implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(GestionApplication.class, args);
     }
 
