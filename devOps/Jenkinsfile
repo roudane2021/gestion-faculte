@@ -19,10 +19,21 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Lancer les conteneurs Docker avec docker-compose
-                sh 'cd devOps/backend'
-                sh 'docker-compose up -d'
+                // Changer de répertoire vers le répertoire "devOps"
+                dir('devOps/backend') {
+                    // Lancer les conteneurs Docker avec docker-compose
+                    sh 'docker-compose up -d'
+                }
             }
         }
     }
+
+        pre {
+            // Actions préliminaires
+                dir('devOps/backend') {
+                    // Lancer les conteneurs Docker avec docker-compose
+                    sh 'docker-compose down'
+                }
+            }
+        }
 }
