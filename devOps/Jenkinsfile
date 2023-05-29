@@ -34,12 +34,4 @@ pipeline {
             }
         }
     }
-
-        pre {
-            // Actions préliminaires
-                dir('devOps/backend') {
-                    // Lancer les conteneurs Docker avec docker-compose
-                    sh 'docker-compose down'
-                }
-            }
 }
