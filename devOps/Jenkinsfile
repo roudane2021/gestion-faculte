@@ -16,8 +16,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
-        stage('Deploy') {
+        stage('Delete Container') {
             steps {
                 // Changer de répertoire vers le répertoire "devOps"
                 dir('devOps/backend') {
@@ -25,6 +24,9 @@ pipeline {
                     sh 'docker-compose down'
                 }
             }
+        }
+
+        stage('Deploy') {
             steps {
                 // Changer de répertoire vers le répertoire "devOps"
                 dir('devOps/backend') {
