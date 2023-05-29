@@ -25,12 +25,17 @@ pipeline {
                 }
             }
         }
+        stage('Replace JAR') {
+             steps {
+                 sh 'rm devOps/backend/couche.jar' // Supprimer l'ancien fichier JAR
+                 sh 'mv couche-web/target/couche.jar devOps/backend/couche-1.jar' // Copier le nouveau fichier JAR dans le répertoire "devOps/backend"
+             }
+         }
 
         stage('Deploy') {
             steps {
                 // Changer de répertoire vers le répertoire "devOps"
                 dir('devOps/backend') {
-                   sh 'rm couche.jar'
                     // Lancer les conteneurs Docker avec docker-compose
                     sh 'docker-compose up -d'
 
