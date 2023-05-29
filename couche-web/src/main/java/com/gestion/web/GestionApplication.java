@@ -35,5 +35,7 @@ public class GestionApplication  implements CommandLineRunner {
         departementRepository.save(departement);
         departement = DepartementEntity.builder().code("1236").nom("PHYSIQUE").libelle("PH").build();
         departementRepository.save(departement);
+        departement = DepartementEntity.builder().code("1237").nom("Science").libelle("Sc").build();
+        departementRepository.save(departement);
     }
 }
