@@ -6,9 +6,9 @@ pipeline {
         stage('Build') {
             steps {
                 // Étape pour construire l'application avec Maven
-                //sh 'mvn clean package'
-                sh 'make'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                sh 'mvn clean package'
+                //sh 'make'
+                //archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
 
