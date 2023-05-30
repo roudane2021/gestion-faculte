@@ -37,6 +37,7 @@ pipeline {
                 // Changer de répertoire vers le répertoire "devOps"
                 dir('devOps/backend') {
                     // Lancer les conteneurs Docker avec docker-compose
+                    sh 'docker-compose build'
                     sh 'docker-compose up -d'
 
                 }
