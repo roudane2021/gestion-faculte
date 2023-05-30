@@ -16,6 +16,7 @@ services:
       - oracle_xe
   oracle_xe:
     image: "gvenzl/oracle-xe:latest"
+    container_name: b_oracle_xe
     restart: always
     ports:
       - 1521:1521
