@@ -9,6 +9,7 @@ pipeline {
                 //sh 'mvn clean package'
                 //sh 'make'
                 //archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                sh 'mvn test'
             }
         }
 
@@ -24,6 +25,7 @@ pipeline {
                 dir('devOps/backend') {
                     // Lancer les conteneurs Docker avec docker-compose
                     //sh 'docker-compose down'
+                    sh 'mvn test'
                 }
             }
         }
