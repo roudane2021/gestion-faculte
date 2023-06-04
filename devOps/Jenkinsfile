@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Étape pour construire l'application avec Maven
-                sh 'mvn clean package'
+                //sh 'mvn clean package'
                 //sh 'make'
                 //archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
@@ -23,17 +23,17 @@ pipeline {
                 // Changer de répertoire vers le répertoire "devOps"
                 dir('devOps/backend') {
                     // Lancer les conteneurs Docker avec docker-compose
-                    sh 'docker-compose down'
+                    //sh 'docker-compose down'
                 }
             }
         }
         stage('Replace JAR') {
              steps {
-                 sh 'rm devOps/backend/couche.jar' // Supprimer l'ancien fichier JAR
+                 //sh 'rm devOps/backend/couche.jar' // Supprimer l'ancien fichier JAR
                  // Copier le nouveau fichier JAR dans le répertoire "devOps/backend"
                  sh 'ls -la devOps/backend'
-                 sh 'mv couche-web/target/couche-web-1.0-SNAPSHOT.jar devOps/backend/couche.jar'
-                 sh 'ls -la devOps/backend'
+                // sh 'mv couche-web/target/couche-web-1.0-SNAPSHOT.jar devOps/backend/couche.jar'
+                 //sh 'ls -la devOps/backend'
              }
          }
 
