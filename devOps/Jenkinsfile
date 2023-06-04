@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Étape pour construire l'application avec Maven
-                sh 'sudo mvn clean install'
+                sh 'mvn clean install'
                 //sh 'make'
                 //archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Étape pour exécuter les tests avec Maven
-                sh 'sudo mvn test'
+                sh 'mvn test'
             }
         }
         stage('Delete Container') {
