@@ -28,7 +28,6 @@ pipeline {
         }
         stage('Replace JAR') {
              steps {
-                 //sh 'rm devOps/backend/couche.jar' // Supprimer l'ancien fichier JAR
                  // Copier le nouveau fichier JAR dans le répertoire "devOps/backend"
                  sh 'ls -la devOps/backend'
                  sh 'mv couche-web/target/couche-web-1.0-SNAPSHOT.jar devOps/backend/couche.jar'
