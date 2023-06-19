@@ -3,12 +3,12 @@ package com.gestion.web.departement;
 import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.web.departement.dto.DepartementDto;
 import com.gestion.web.departement.mapper.IDepartementDtoMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/depatemant")
