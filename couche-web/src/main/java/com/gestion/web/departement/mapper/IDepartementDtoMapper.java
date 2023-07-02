@@ -11,4 +11,7 @@ public interface IDepartementDtoMapper {
 
     DepartementDto departementDto(Departement departement);
     List<DepartementDto> departementDtos(List<Departement> departements);
+
+    Departement departement(DepartementDto departementDto);
+    List<Departement> departements(List<DepartementDto> departementDtos);
 }

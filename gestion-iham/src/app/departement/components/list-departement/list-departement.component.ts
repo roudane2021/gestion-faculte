@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { urlApi} from '../../../shared/url-api/url.api';
 
 @Component({
   selector: 'app-list-departement',
@@ -15,6 +16,7 @@ export class ListDepartementComponent implements OnInit{
 
   useLanguage(language: string): void {
     this.translateService.use(language);
+    console.log(urlApi.listDepartment)
 }
 
 }
