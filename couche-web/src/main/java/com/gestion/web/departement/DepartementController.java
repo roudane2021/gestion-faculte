@@ -1,8 +1,8 @@
 package com.gestion.web.departement;
 
 import com.gestion.service.application.departement.IDepartementApplication;
-import com.gestion.service.application.departement.models.Departement;
-import com.gestion.service.application.departement.models.DepartementFilter;
+import com.gestion.web.commun.filter.FiltersDto;
+import com.gestion.web.commun.mapper.IFilterMapper;
 import com.gestion.web.departement.dto.DepartementDto;
 import com.gestion.web.departement.dto.DepartementFilterDto;
 import com.gestion.web.departement.mapper.IDepartementDtoMapper;
@@ -14,8 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+
 import java.util.Optional;
 
 @RestController
@@ -27,10 +26,13 @@ public class DepartementController {
 
     private final IDepartementFilterDtoMapper departementFilterDtoMapper;
 
-    public DepartementController(IDepartementApplication departementApplication, IDepartementDtoMapper departementMapper, IDepartementFilterDtoMapper departementFilterDtoMapper) {
+    private final IFilterMapper filterMapper;
+
+    public DepartementController(IDepartementApplication departementApplication, IDepartementDtoMapper departementMapper, IDepartementFilterDtoMapper departementFilterDtoMapper, IFilterMapper filterMapper) {
         this.departementApplication = departementApplication;
         this.departementMapper = departementMapper;
         this.departementFilterDtoMapper = departementFilterDtoMapper;
+        this.filterMapper = filterMapper;
     }
 
     @GetMapping("/{code}")
@@ -40,10 +42,10 @@ public class DepartementController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<Page<DepartementDto>> searchDepartements(@RequestBody DepartementFilterDto departementFilterDto, @RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
+    public ResponseEntity<Page<DepartementDto>> searchDepartements(@RequestBody FiltersDto filtersDto, @RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
 
         Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(5));
-        Page<DepartementDto> departementDtoList = departementApplication.searchDepartements(pageable, departementFilterDtoMapper.departementDto(departementFilterDto))
+        Page<DepartementDto> departementDtoList = departementApplication.searchDepartements(pageable, filterMapper.toFilters(filtersDto))
                 .map(entity -> departementMapper.departementDto(entity));
         return ResponseEntity.ok(departementDtoList);
     }
