@@ -2,6 +2,7 @@ package com.gestion.service.application.departement.impl;
 
 import com.gestion.infrastructure.repositories.impl.DepartementRepository;
 import com.gestion.model.entities.DepartementEntity;
+import com.gestion.service.application.common.execption.GestionException;
 import com.gestion.service.application.departement.DepartementSpecifications;
 import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.service.application.departement.mapper.IDepartementMapper;
@@ -29,9 +30,9 @@ public class IDepartementApplicationImpl implements IDepartementApplication {
     }
 
     @Override
-    public Departement getDepartement(String code) {
+    public Departement getDepartement(String code) throws  GestionException{
         Optional<Departement> departementOptional = departementRepository.findById(code).map(departementMapper::depatement);
-        return departementOptional.orElseGet(Departement::new);
+        return departementOptional.orElseThrow(() -> new GestionException(" element Not Found"));
     }
 
     @Override

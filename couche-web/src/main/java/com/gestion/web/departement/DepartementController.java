@@ -1,5 +1,6 @@
 package com.gestion.web.departement;
 
+import com.gestion.service.application.common.execption.GestionException;
 import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.service.application.departement.models.Departement;
 import com.gestion.service.application.departement.models.DepartementFilter;
@@ -34,7 +35,7 @@ public class DepartementController {
     }
 
     @GetMapping("/{code}")
-    public ResponseEntity<DepartementDto> getDepartemetByCode(@PathVariable(name = "code") String code) {
+    public ResponseEntity<DepartementDto> getDepartemetByCode(@PathVariable(name = "code") String code) throws GestionException {
         DepartementDto departementDto = departementMapper.departementDto(departementApplication.getDepartement(code));
         return ResponseEntity.ok(departementDto);
     }
@@ -53,5 +54,11 @@ public class DepartementController {
     public ResponseEntity<DepartementDto> postDepartemet(@Validated @RequestBody DepartementDto departementDto) {
         departementDto = departementMapper.departementDto(departementApplication.save(departementMapper.departement(departementDto)));
         return ResponseEntity.ok(departementDto);
+    }
+
+    @GetMapping("fortest/{code}")
+    public ResponseEntity<String> fortest(@PathVariable(name = "code") Integer code) throws GestionException {
+
+        return ResponseEntity.ok("fffffffffffffffffffffff");
     }
 }
