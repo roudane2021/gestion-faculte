@@ -2,9 +2,7 @@ package com.gestion.service.application.departement.impl;
 
 import com.gestion.infrastructure.repositories.impl.DepartementRepository;
 import com.gestion.model.entities.DepartementEntity;
-import com.gestion.service.application.commun.specification.Filters;
-import com.gestion.service.application.commun.specification.ISpecificationEntity;
-import com.gestion.service.application.commun.specification.SpecificationEntity;
+import com.gestion.service.application.common.execption.GestionException;
 import com.gestion.service.application.departement.DepartementSpecifications;
 import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.service.application.departement.mapper.IDepartementMapper;
@@ -26,18 +24,15 @@ public class IDepartementApplicationImpl implements IDepartementApplication {
     private final  DepartementRepository departementRepository;
     private final IDepartementMapper departementMapper;
 
-    private final ISpecificationEntity<DepartementEntity> specificationEntity;
-
-    public IDepartementApplicationImpl(DepartementRepository departementRepository, IDepartementMapper departementMapper, ISpecificationEntity specificationEntity) {
+    public IDepartementApplicationImpl(DepartementRepository departementRepository, IDepartementMapper departementMapper) {
         this.departementRepository = departementRepository;
         this.departementMapper = departementMapper;
-        this.specificationEntity = specificationEntity;
     }
 
     @Override
-    public Departement getDepartement(String code) {
+    public Departement getDepartement(String code) throws  GestionException{
         Optional<Departement> departementOptional = departementRepository.findById(code).map(departementMapper::depatement);
-        return departementOptional.orElseGet(Departement::new);
+        return departementOptional.orElseThrow(() -> new GestionException(" element Not Found"));
     }
 
     @Override
@@ -46,8 +41,8 @@ public class IDepartementApplicationImpl implements IDepartementApplication {
         return departementMapper.depatement(departementRepository.save(departementEntity));
     }
     @Override
-    public Page<Departement> searchDepartements(Pageable pageable, Filters filters) {
-        Specification<DepartementEntity> specification = this.specificationEntity.generateSpecification(filters);
+    public Page<Departement> searchDepartements(Pageable pageable, DepartementFilter departementFilter) {
+        Specification<DepartementEntity> specification = DepartementSpecifications.specification(departementFilter);
         Page<DepartementEntity> departementEntityPage = departementRepository.findAll(specification, pageable);
         return departementEntityPage.map(entity -> departementMapper.depatement(entity));
     }
