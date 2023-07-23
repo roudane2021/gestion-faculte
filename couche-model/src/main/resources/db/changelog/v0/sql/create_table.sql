@@ -70,11 +70,3 @@ CONSTRAINT pk_etudiant_cours  PRIMARY KEY (etudiant_code_apoge,cours_code),
 CONSTRAINT fk_etudiant_cours_cours FOREIGN KEY (cours_code) REFERENCES cours(code),
 CONSTRAINT fk_etudiant_cours_etudiant FOREIGN KEY (etudiant_code_apoge) REFERENCES etudiant(code_apoge)
 );
-
-
-
-
-
-
-
-

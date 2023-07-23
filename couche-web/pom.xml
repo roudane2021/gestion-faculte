@@ -44,6 +44,7 @@
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
     </dependency>
+
   </dependencies>
   <build>
     <plugins>
