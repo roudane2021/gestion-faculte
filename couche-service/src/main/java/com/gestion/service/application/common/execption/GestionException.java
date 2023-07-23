@@ -2,7 +2,7 @@ package com.gestion.service.application.common.execption;
 
 
 
-public class GestionException extends  Exception{
+public class GestionException extends  RuntimeException{
 
     private String message;
 

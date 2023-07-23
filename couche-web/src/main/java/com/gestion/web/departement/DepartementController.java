@@ -12,11 +12,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.annotation.security.RolesAllowed;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/depatements")
@@ -43,7 +50,13 @@ public class DepartementController {
     }
 
     @PostMapping("/search")
+    @PostAuthorize("hasRole('USER_ADMIN')")
+   // @RolesAllowed("USER_ADMIN")
     public ResponseEntity<Page<DepartementDto>> searchDepartements(@RequestBody FiltersDto filtersDto, @RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
+
 
         Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(5));
         Page<DepartementDto> departementDtoList = departementApplication.searchDepartements(pageable, filterMapper.toFilters(filtersDto))
