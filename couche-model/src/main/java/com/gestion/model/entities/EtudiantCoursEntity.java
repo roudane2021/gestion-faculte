@@ -3,6 +3,7 @@ package com.gestion.model.entities;
 import com.gestion.model.utils.compositeKey.EtudiantCoursKey;
 import lombok.*;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,11 +22,11 @@ public class EtudiantCoursEntity implements Serializable {
     @ManyToOne
     @MapsId("etudiantCodeApoge")
     @JoinColumn(name = "etudiant_code_apoge")
-    private EtudiantEntity etudiant;
+    private UserEntity etudiant;
 
     @ManyToOne
     @MapsId("coursCode")
-    @JoinColumn(name = "ccours_code")
+    @JoinColumn(name = "cours_code")
     private CoursEntity cours;
 
     private Integer anneeUnivirsite;

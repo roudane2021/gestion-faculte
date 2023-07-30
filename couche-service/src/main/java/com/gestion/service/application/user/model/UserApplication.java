@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +17,6 @@ public class UserApplication {
     private String username;
     private String email;
     private String password;
+    private String telephone;
+    private LocalDate dateNaissance;
 }

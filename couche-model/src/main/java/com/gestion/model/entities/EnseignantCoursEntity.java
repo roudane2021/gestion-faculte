@@ -20,7 +20,7 @@ public class EnseignantCoursEntity implements Serializable {
     @ManyToOne
     @MapsId("etudiantCodeApoge")
     @JoinColumn(name = "enseignant_matrucle")
-    private EnseignantEntity enseignant;
+    private UserEntity enseignant;
 
     @ManyToOne
     @MapsId("coursCode")

@@ -69,7 +69,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                 // Our private endpoints
                 //.antMatchers("/depatements/**").hasRole("USER_ADMIN")
-                .anyRequest().authenticated();
+                //.anyRequest().authenticated();
+                        .anyRequest().permitAll();
 
         // Add JWT token filter
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtTokenUtil, userDetailsService));

@@ -4,22 +4,31 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Value;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JwtTokenUtil {
 
     private static final String SECRET_KEY = "skjdsklfjhkd57f5sdfsdf4854gfdg@glfdgjkkjsdkf,kldfjgfg";
+
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 4; // 4 hour
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        Set<String> authorities = new HashSet<>();
+        if (Objects.nonNull(userDetails) && CollectionUtils.isNotEmpty(userDetails.getAuthorities()) ) {
+            authorities =  userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+        }
+        claims.put(HttpHeaders.AUTHORIZATION, authorities);
         return createToken(claims, userDetails.getUsername());
     }
 

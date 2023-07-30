@@ -3,14 +3,17 @@ package com.gestion.web.common.security.controller;
 import com.gestion.service.application.user.IUserApplication;
 import com.gestion.web.common.dto.UserRegisterDto;
 import com.gestion.web.common.security.mapper.IUserDtoMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/user-gestion")
 public class RegisterController {
 
     private final IUserApplication userApplication;
@@ -21,8 +24,8 @@ public class RegisterController {
         this.userDtoMapper = userDtoMapper;
     }
 
-    @PostMapping
-    public String register(@RequestBody final UserRegisterDto userRegisterDto) {
+    @PostMapping("/create-etudiant")
+    public String registerEtudiant(@Valid @RequestBody final UserRegisterDto userRegisterDto) {
         UserRegisterDto registerDto = userDtoMapper.userDto(userApplication.save(userDtoMapper.userApplication(userRegisterDto)));
         return registerDto.getUsername();
     }
