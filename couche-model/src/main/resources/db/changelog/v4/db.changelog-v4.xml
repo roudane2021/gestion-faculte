@@ -3,10 +3,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <include file="db/changelog/v0/db.changelog-v0.xml"/>
-    <include file="db/changelog/v1/db.changelog-v1.xml"/>
-    <include file="db/changelog/v2/db.changelog-v2.xml"/>
-    <include file="db/changelog/v3/db.changelog-v3.xml"/>
-    <include file="db/changelog/v4/db.changelog-v4.xml"/>
-    <include file="db/changelog/v5/db.changelog-v5.xml"/>
+    <changeSet id="1" author="roudane">
+        <comment>Updated SQL file to include new featured</comment>
+        <sqlFile path="sql/update_structure.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
