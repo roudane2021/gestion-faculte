@@ -30,8 +30,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException(" element Not Found"));
         Set<GrantedAuthority> authorities = new HashSet<>();
-        if (Objects.nonNull(userEntity) && Objects.nonNull(userEntity.getProfileEntity())  && CollectionUtils.isNotEmpty(userEntity.getProfileEntity().getRoleEntities()) ) {
-            userEntity.getProfileEntity().getRoleEntities().forEach(roleApp -> {
+        if (Objects.nonNull(userEntity) && Objects.nonNull(userEntity.getProfile())  && CollectionUtils.isNotEmpty(userEntity.getProfile().getRoleEntities()) ) {
+            authorities.add(new SimpleGrantedAuthority(userEntity.getProfile().getCode()));
+            userEntity.getProfile().getRoleEntities().forEach(roleApp -> {
                 GrantedAuthority role = new SimpleGrantedAuthority(roleApp.getRoleName());
                 authorities.add(role);
             });

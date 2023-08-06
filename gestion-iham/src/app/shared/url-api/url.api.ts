@@ -1,5 +1,6 @@
 import { environment } from "../../../environments/environment";
 
 export const urlApi = {
-    listDepartment: `${environment.apiUrl}depatement/all`
+    login: `${environment.apiUrl}login`,
+    listDepartment: `${environment.apiUrl}depatements/search`
 };

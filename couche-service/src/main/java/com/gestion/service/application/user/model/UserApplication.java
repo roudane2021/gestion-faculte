@@ -19,4 +19,5 @@ public class UserApplication {
     private String password;
     private String telephone;
     private LocalDate dateNaissance;
+    private ProfileApllication profile;
 }
