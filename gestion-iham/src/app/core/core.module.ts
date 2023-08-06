@@ -16,7 +16,8 @@ import { LoginComponent } from './login/login.component';
     SharedModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ]
 })
 export class CoreModule { }

@@ -5,4 +5,5 @@ import com.gestion.service.application.user.model.UserApplication;
 public interface IUserApplication {
 
     UserApplication save(UserApplication user);
+    UserApplication getUser(String username);
 }

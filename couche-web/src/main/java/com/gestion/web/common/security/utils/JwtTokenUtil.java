@@ -21,14 +21,18 @@ public class JwtTokenUtil {
     private static final String SECRET_KEY = "skjdsklfjhkd57f5sdfsdf4854gfdg@glfdgjkkjsdkf,kldfjgfg";
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 4; // 4 hour
+    public static final String PROFILE = "PROFILE";
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, String profile) {
         Map<String, Object> claims = new HashMap<>();
         Set<String> authorities = new HashSet<>();
         if (Objects.nonNull(userDetails) && CollectionUtils.isNotEmpty(userDetails.getAuthorities()) ) {
+            userDetails.getAuthorities().stream().findFirst().ifPresent(element -> {
+            });
             authorities =  userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         }
         claims.put(HttpHeaders.AUTHORIZATION, authorities);
+        claims.put(PROFILE, profile);
         return createToken(claims, userDetails.getUsername());
     }
 

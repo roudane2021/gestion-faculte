@@ -1,5 +1,6 @@
 package com.gestion.web.common.security;
 
+import com.gestion.service.application.user.IUserApplication;
 import com.gestion.web.common.security.filters.JWTAuthenticationFilter;
 import com.gestion.web.common.security.filters.JwtTokenFilter;
 import com.gestion.web.common.security.utils.JwtTokenUtil;
@@ -21,6 +22,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -36,17 +40,22 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenUtil jwtTokenUtil;
 
+    private final IUserApplication userApplication;
 
-    public SecurityConfig(JwtTokenFilter jwtTokenFilter, UserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil) {
+
+    public SecurityConfig(JwtTokenFilter jwtTokenFilter, UserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil, IUserApplication userApplication) {
         this.jwtTokenFilter = jwtTokenFilter;
         this.userDetailsService = userDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.userApplication = userApplication;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Enable CORS and disable CSRF
-        http = http.csrf().disable();
+        // Enable CORS and disable CSRF
+        http = http.cors().and().csrf().disable();
+
         // Set session management to stateless
         http = http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
         // Set unauthorized requests exception handler
@@ -73,7 +82,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                         .anyRequest().permitAll();
 
         // Add JWT token filter
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtTokenUtil, userDetailsService));
+
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtTokenUtil, userDetailsService, userApplication));
         http.addFilterBefore(
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
@@ -99,12 +109,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+        config.setAllowedOriginPatterns(Arrays.asList("*"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
         source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
+
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

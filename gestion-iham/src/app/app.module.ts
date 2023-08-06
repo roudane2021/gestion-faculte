@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,11 @@ import { CoreModule } from './core/core.module';
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import { JwtModule } from "@auth0/angular-jwt";
+import { GENERAL } from "./shared/models/constatnts";
+import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -18,6 +22,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule.forRoot({ type: 'line-scale-pulse-out' }),
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
@@ -27,9 +32,17 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
             deps: [HttpClient]
         }
     }),
-    CoreModule
+    CoreModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      },
+    }),
   ],
-  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
@@ -38,4 +51,8 @@ export class AppModule {
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
+}
+
+export function tokenGetter() {
+  return localStorage.getItem(GENERAL.JWT_KEY);
 }

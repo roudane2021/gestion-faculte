@@ -47,7 +47,6 @@ public class JwtTokenFilter  extends  OncePerRequestFilter{
             authentication.setDetails(
                     new WebAuthenticationDetailsSource().buildDetails(request)
             );
-            response.addHeader("rachid","ayoub");
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(request, response);

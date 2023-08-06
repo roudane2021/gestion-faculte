@@ -37,7 +37,7 @@ public class UserEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_code", referencedColumnName = "code")
-    private ProfileEntity profileEntity;
+    private ProfileEntity profile;
 
     @OneToMany(mappedBy = "enseignant")
     Set<EnseignantCoursEntity> enseignantCours;

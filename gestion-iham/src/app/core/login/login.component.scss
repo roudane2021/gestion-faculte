@@ -1,0 +1,35 @@
+
+.form-card{
+    margin-top: 10%;
+    margin-left: 25%;
+    width: 50%;
+    height: 30%;
+}
+.form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  mat-form-field {
+    width: 80%;
+    &.full-width {
+      width: 90%;
+      margin-left: 5%;
+    }
+  }
+  mat-card-actions {
+    display: flex;
+    flex-direction: column;
+
+
+  }
+
+  mat-card-title {
+    display: flex;
+    flex-direction: column;
+    
+
+  }
+ 

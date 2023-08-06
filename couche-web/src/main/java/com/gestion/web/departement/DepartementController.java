@@ -50,7 +50,7 @@ public class DepartementController {
     }
 
     @PostMapping("/search")
-    @PostAuthorize("hasRole('USER_ADMIN')")
+   // @PostAuthorize("hasRole('ADMIN')")
    // @RolesAllowed("USER_ADMIN")
     public ResponseEntity<Page<DepartementDto>> searchDepartements(@RequestBody FiltersDto filtersDto, @RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
 
@@ -71,9 +71,4 @@ public class DepartementController {
         return ResponseEntity.ok(departementDto);
     }
 
-    @GetMapping("fortest/{code}")
-    public ResponseEntity<String> fortest(@PathVariable(name = "code") Integer code) throws GestionException {
-
-        return ResponseEntity.ok("fffffffffffffffffffffff");
-    }
 }
