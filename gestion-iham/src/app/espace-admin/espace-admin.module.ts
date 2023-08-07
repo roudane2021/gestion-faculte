@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EspaceAdminRoutingModule } from './espace-admin-routing.module';
 import { IndexComponent } from './index/index.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { IndexComponent } from './index/index.component';
   ],
   imports: [
     CommonModule,
-    EspaceAdminRoutingModule
+    EspaceAdminRoutingModule,
+    SharedModule
   ]
 })
 export class EspaceAdminModule { }

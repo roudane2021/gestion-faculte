@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,12 +51,13 @@ public class DepartementController {
     }
 
     @PostMapping("/search")
-   // @PostAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_CREATE_USER')")
    // @RolesAllowed("USER_ADMIN")
     public ResponseEntity<Page<DepartementDto>> searchDepartements(@RequestBody FiltersDto filtersDto, @RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
+
 
 
         Pageable pageable = PageRequest.of(page.orElse(0), size.orElse(5));

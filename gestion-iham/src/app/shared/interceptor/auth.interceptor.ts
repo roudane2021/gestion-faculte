@@ -19,7 +19,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
         const url: string = req.url;
         this.spinner.show();
-        console.log("ddddddddddddd ")
 
         if ( url?.endsWith(GENERAL.URL.LOGIN) ) {
             return next.handle(req).pipe(finalize(() => {this.spinner.hide()}));

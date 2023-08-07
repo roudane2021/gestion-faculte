@@ -8,6 +8,7 @@ import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -77,9 +78,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                 // Our private endpoints
-                //.antMatchers("/depatements/**").hasRole("USER_ADMIN")
-                //.anyRequest().authenticated();
-                        .anyRequest().permitAll();
+                //.antMatchers("/depatements/**").hasRole("CREATE_USER")
+               // .anyRequest().permitAll();
+                .anyRequest().authenticated();
 
         // Add JWT token filter
 
@@ -128,5 +129,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 /*   @Bean
     public GrantedAuthorityDefaults grantedAuthorityDefaults() {
         return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix
+    }*/
+
+/*    @Bean
+    public RoleVoter roleVoter() {
+        RoleVoter roleVoter = new RoleVoter();
+        roleVoter.setRolePrefix(""); // Remove the ROLE_ prefix
+        return roleVoter;
     }*/
 }

@@ -4,11 +4,14 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HasRoleDirective
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -18,8 +21,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     MaterialModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HasRoleDirective
+  ],
+  entryComponents: [
+    //HasRoleDirective
   ]
+  
 })
 export class SharedModule {
 

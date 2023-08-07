@@ -36,6 +36,11 @@ export class JwtService {
     return this.getUserApp()?.PROFILE === profile;
   }
 
+  roles() : string[] {
+
+    return this.getUserApp()?.Authorization!;
+  }
+
   login() : void {
 
     this.router.navigate([GENERAL.URL.LOGIN]);
