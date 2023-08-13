@@ -1,0 +1,30 @@
+<mat-card class="form-card">
+
+    <mat-card-title>
+        <div>{{ 'LOGIN.TITLE'| translate}}</div>
+    </mat-card-title>
+<mat-card-content>
+<form [formGroup]="loginForm"  class="form">
+
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'LOGIN.CHAMPE.USERNAME'| translate}}</mat-label>
+        <input matInput placeholder="{{ 'LOGIN.CHAMPE.USERNAME.PLACEHOLDER'| translate}}" formControlName="username">
+        <mat-error *ngIf="formService.isValidAbstractControl(usernameCtrl)"> {{formService.getFormControlErrorText(usernameCtrl)}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> {{ 'LOGIN.CHAMPE.PASSWORD'| translate}}</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="{{'LOGIN.CHAMPE.PASSWORD.PLACEHOLDER'|translate}}" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        <mat-error *ngIf="formService.isValidAbstractControl(passwordCtrl)"> {{formService.getFormControlErrorText(passwordCtrl)}}</mat-error>
+      </mat-form-field>
+
+</form>
+</mat-card-content>
+<mat-card-actions >
+    <button mat-flat-button [disabled]="onDisabled()" (click)="onSubmit()" color="primary" >{{ 'LOGIN.BUTTON.LOGIN'| translate}}</button>
+</mat-card-actions>
+</mat-card>

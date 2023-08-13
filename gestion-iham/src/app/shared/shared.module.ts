@@ -5,6 +5,7 @@ import { MaterialModule } from './material/material.module';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 
 
@@ -16,13 +17,15 @@ import { HasRoleDirective } from './directives/has-role.directive';
     CommonModule,
     MaterialModule,
     TranslateModule.forChild(),
+    HttpClientJsonpModule
   ],
   exports: [
     RouterModule,
     MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    HasRoleDirective
+    HasRoleDirective,
+    HttpClientJsonpModule
   ],
   entryComponents: [
     //HasRoleDirective

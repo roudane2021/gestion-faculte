@@ -5,14 +5,12 @@ import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.web.commun.filter.FiltersDto;
 import com.gestion.web.commun.mapper.IFilterMapper;
 import com.gestion.web.departement.dto.DepartementDto;
-import com.gestion.web.departement.dto.DepartementFilterDto;
 import com.gestion.web.departement.mapper.IDepartementDtoMapper;
 import com.gestion.web.departement.mapper.IDepartementFilterDtoMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,10 +19,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/depatements")
@@ -51,7 +47,7 @@ public class DepartementController {
     }
 
     @PostMapping("/search")
-    @PreAuthorize("hasRole('ROLE_CREATE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
    // @RolesAllowed("USER_ADMIN")
     public ResponseEntity<Page<DepartementDto>> searchDepartements(@RequestBody FiltersDto filtersDto, @RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size) {
 

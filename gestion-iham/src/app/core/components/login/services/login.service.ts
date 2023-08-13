@@ -29,7 +29,7 @@ export class LoginService {
 
     authentification(user: UserSignIn): Observable<any> {
 
-        return this.httpclient.post<any>(urlApi.login, user, { observe: 'response' }).pipe(delay(2000));
+        return this.httpclient.post<any>(urlApi.login, user, { observe: 'response' });
     }
 
     redirectBasedOnUserProfile(jwt: string) {

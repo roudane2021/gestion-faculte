@@ -3,6 +3,7 @@ package com.gestion.service.application.user.impl;
 import com.gestion.infrastructure.repositories.impl.UserRepository;
 import com.gestion.model.entities.UserEntity;
 import com.gestion.service.application.common.execption.GestionException;
+import com.gestion.service.application.common.utils.Utils;
 import com.gestion.service.application.user.IUserApplication;
 import com.gestion.service.application.user.mapper.IUserMapper;
 import com.gestion.service.application.user.model.UserApplication;
@@ -24,7 +25,7 @@ public class UserApplicationImpl implements IUserApplication {
     @Override
     public UserApplication save(UserApplication user) {
         UserEntity userEntity = this.userMapper.userEntity(user);
-        userEntity.setCode("123456");
+        userEntity.setCode(Utils.generateRandomString(15));
         return  this.userMapper.userApp(userRepository.save(userEntity));
     }
 

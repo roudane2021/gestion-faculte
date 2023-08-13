@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class DepartementDto {
-    private String code;
     private String nom;
     private String libelle;
 }

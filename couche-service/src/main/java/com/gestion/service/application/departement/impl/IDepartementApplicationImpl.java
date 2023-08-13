@@ -3,6 +3,7 @@ package com.gestion.service.application.departement.impl;
 import com.gestion.infrastructure.repositories.impl.DepartementRepository;
 import com.gestion.model.entities.DepartementEntity;
 import com.gestion.service.application.common.execption.GestionException;
+import com.gestion.service.application.common.utils.Utils;
 import com.gestion.service.application.departement.DepartementSpecifications;
 import com.gestion.service.application.departement.IDepartementApplication;
 import com.gestion.service.application.departement.mapper.IDepartementMapper;
@@ -38,6 +39,7 @@ public class IDepartementApplicationImpl implements IDepartementApplication {
     @Override
     public Departement save(Departement departement) {
         DepartementEntity departementEntity = departementMapper.depatementEntity(departement);
+        departementEntity.setCode(Utils.generateRandomString(15));
         return departementMapper.depatement(departementRepository.save(departementEntity));
     }
     @Override

@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit{
   usernameCtrl!: FormControl;
   passwordCtrl!: FormControl;
   loading : boolean = false;
+  hide = true;
 
   constructor(private fromBuild: FormBuilder, public formService: FormsService, private loginService: LoginService,
                private jwtHelperService: JwtHelperService){}

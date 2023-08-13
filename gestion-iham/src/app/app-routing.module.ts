@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './core/login/login.component';
+import { LoginComponent } from './core/components/login/login.component';
 import { GENERAL } from './shared/models/constatnts';
 import { AdminGuard, EnseignatGuard, EtudiantGuard, GuardWithProfile } from './shared/guards/all.guard';
 

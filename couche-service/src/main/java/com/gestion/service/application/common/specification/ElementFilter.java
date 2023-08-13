@@ -1,4 +1,4 @@
-package com.gestion.service.application.commun.specification;
+package com.gestion.service.application.common.specification;
 
 import lombok.*;
 

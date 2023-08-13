@@ -1,4 +1,4 @@
-package com.gestion.service.application.commun.specification;
+package com.gestion.service.application.common.specification;
 
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class SpecificationEntity<T>  implements ISpecificationEntity<T>{
+public class SpecificationEntity<T>  implements ISpecificationEntity<T> {
 
     @Override
     public   Specification<T> generateSpecification(Filters filters) {

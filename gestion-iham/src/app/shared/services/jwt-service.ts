@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GENERAL } from '../models/constatnts';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserApp } from 'src/app/core/login/models/login.model';
+import { UserApp } from 'src/app/core/components/login/models/login.model';
 import { Router } from '@angular/router';
 
 

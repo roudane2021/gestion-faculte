@@ -1,0 +1,41 @@
+.container {
+    height: 800px;
+  }
+  .app-names {
+    height: 17px;
+  }
+  .menu-button {
+    height: 20px;
+  }
+  .mat-icon-home{
+    height: 20px;
+  }
+  .sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidenav {
+    user-select: none;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .subMenu {
+    overflow-y: hidden;
+    transition: transform 300ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    padding-left: 15px;
+  }
+  .subMenu.expanded {
+    transform: scaleY(1);
+  }
